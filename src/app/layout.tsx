@@ -14,6 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  other: {
+    "3a495045efabbbc": "388250604da295b1fdb886202c04be38",
+  },
   title: {
     default: "BespaarRadar | Ontdek waar je kunt besparen",
     template: "%s | BespaarRadar",
