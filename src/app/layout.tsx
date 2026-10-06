@@ -14,9 +14,6 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  other: {
-    "3a495045efabbbc": "388250604da295b1fdb886202c04be38",
-  },
   title: {
     default: "BespaarRadar | Ontdek waar je kunt besparen",
     template: "%s | BespaarRadar",
@@ -45,6 +42,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="nl"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <meta
+          name="3a495045efabbbc"
+          content="388250604da295b1fdb886202c04be38"
+        />
+      </head>
+
       <body className="min-h-full">
         <div className="flex min-h-screen flex-col">
           <div className="flex-1">{children}</div>
