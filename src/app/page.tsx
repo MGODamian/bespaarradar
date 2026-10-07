@@ -1405,6 +1405,7 @@ function handleCompareClick(
     energy: "/vergelijken/energie",
     internet: "/vergelijken/internet",
     mobile: "/vergelijken/sim-only",
+    subscriptions: "/vergelijken/abonnementen",
   };
 
   const route = routes[category];
