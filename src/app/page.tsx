@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 
 type Costs = {
   householdSize: string;
@@ -77,9 +78,29 @@ type ResultCalculations = {
 };
 
 export default function Home() {
+  const router = useRouter();
+
   const [screen, setScreen] = useState<"home" | "check" | "result">("home");
   const [step, setStep] = useState(0);
   const [costs, setCosts] = useState<Costs>(initialCosts);
+  const [isRestoringResult, setIsRestoringResult] = useState(true);
+
+  useEffect(() => {
+    const savedResult = sessionStorage.getItem("bespaarradar-result");
+
+    if (savedResult) {
+      try {
+        const savedCosts = JSON.parse(savedResult) as Costs;
+        setCosts(savedCosts);
+        setScreen("result");
+        sessionStorage.removeItem("bespaarradar-result");
+      } catch {
+        sessionStorage.removeItem("bespaarradar-result");
+      }
+    }
+
+    setIsRestoringResult(false);
+  }, []);
 
   const calculations = useMemo<ResultCalculations>(() => {
     const energy = Number(costs.energy) || 0;
@@ -255,6 +276,10 @@ export default function Home() {
     setScreen("home");
     setStep(0);
     window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  if (isRestoringResult) {
+    return <main className="min-h-screen bg-[#f7faf7]" />;
   }
 
   if (screen === "check") {
@@ -996,6 +1021,8 @@ function ResultScreen({
   restart: () => void;
   goHome: () => void;
 }) {
+  const router = useRouter();
+
   const results = [
     {
       icon: "⚡",
@@ -1112,7 +1139,7 @@ function ResultScreen({
 
             <button
               type="button"
-              onClick={() => handleCompareClick(highest.category)}
+              onClick={() => handleCompareClick(highest.category, costs, router)}
               className="mt-7 rounded-2xl bg-slate-950 px-6 py-4 font-black text-white transition hover:bg-emerald-600"
             >
               {highest.button} →
@@ -1146,6 +1173,7 @@ function ResultScreen({
                 description={result.description}
                 buttonText={result.button}
                 category={result.category}
+                costs={costs}
               />
             ))}
           </div>
@@ -1206,6 +1234,7 @@ function ResultCard({
   description,
   buttonText,
   category,
+  costs,
 }: {
   number: number;
   icon: string;
@@ -1214,7 +1243,9 @@ function ResultCard({
   description: string;
   buttonText: string;
   category: string;
+  costs: Costs;
 }) {
+  const router = useRouter();
   const level = getPriorityLevel(priority);
 
   return (
@@ -1244,7 +1275,7 @@ function ResultCard({
 
         <button
           type="button"
-          onClick={() => handleCompareClick(category)}
+          onClick={() => handleCompareClick(category, costs, router)}
           className="shrink-0 rounded-xl bg-slate-950 px-5 py-3 text-sm font-black text-white transition hover:bg-emerald-600"
         >
           {buttonText} →
@@ -1365,24 +1396,26 @@ function getSubscriptionDescription(costs: Costs) {
   return text;
 }
 
-function handleCompareClick(category: string) {
-  /*
-    HIER komen later onze echte affiliate-links.
+function handleCompareClick(
+  category: string,
+  costs: Costs,
+  router: ReturnType<typeof useRouter>
+) {
+  const routes: Record<string, string> = {
+    energy: "/vergelijken/energie",
+    internet: "/vergelijken/internet",
+    mobile: "/vergelijken/sim-only",
+  };
 
-    Bijvoorbeeld:
-    energy -> affiliate energievergelijker
-    internet -> affiliate internetvergelijker
-    mobile -> affiliate telecomvergelijker
+  const route = routes[category];
 
-    Totdat we een echte partner hebben sturen we de gebruiker
-    bewust nog niet naar een willekeurige commerciële website.
-  */
+  if (route) {
+    sessionStorage.setItem("bespaarradar-result", JSON.stringify(costs));
+    router.push(route);
+    return;
+  }
 
-  console.log(`BespaarRadar CTA clicked: ${category}`);
-
-  alert(
-    "Deze vergelijking wordt binnenkort gekoppeld aan actuele aanbieders. Je BespaarRadar-resultaat blijft voorlopig een indicatie."
-  );
+  alert("Voor deze categorie is momenteel nog geen live vergelijker beschikbaar.");
 }
 
 function MoneyInput({
