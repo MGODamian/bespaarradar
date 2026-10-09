@@ -20,7 +20,17 @@ export const metadata: Metadata = {
   },
   description:
     "Controleer je vaste lasten voor energie, internet, mobiel en abonnementen en ontdek wat het vergelijken waard is.",
+  metadataBase: new URL("https://mijnbespaarradar.nl"),
   applicationName: "BespaarRadar",
+  openGraph: {
+    type: "website",
+    locale: "nl_NL",
+    siteName: "BespaarRadar",
+    title: "BespaarRadar | Ontdek waar je kunt besparen",
+    description:
+      "Krijg inzicht in je vaste lasten en ontdek welke abonnementen het vergelijken waard zijn.",
+    url: "https://mijnbespaarradar.nl",
+  },
   keywords: [
     "besparen",
     "vaste lasten",
