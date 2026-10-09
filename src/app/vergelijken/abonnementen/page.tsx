@@ -1,3 +1,14 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Abonnementen controleren en besparen",
+  description:
+    "Controleer je streamingdiensten, sportabonnementen en andere vaste kosten. Ontdek welke abonnementen je opnieuw kunt beoordelen.",
+  alternates: {
+    canonical: "/vergelijken/abonnementen",
+  },
+};
+
 ﻿import BackButton from "@/components/BackButton";
 
 export default function AbonnementenVergelijkenPage() {

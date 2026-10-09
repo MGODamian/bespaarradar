@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Internet vergelijken | Snelheid en abonnementen",
+  description: "Internet vergelijken? Ontdek waar je op moet letten bij internetsnelheid, glasvezel, beschikbaarheid, abonnementskosten en contractvoorwaarden.",
+  alternates: {
+    canonical: "/vergelijken/internet",
+  },
+};
+
 import BackButton from "@/components/BackButton";
 
 const aandachtspunten = [

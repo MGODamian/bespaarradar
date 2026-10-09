@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Energie vergelijken | Contracten en tarieven",
+  description: "Energie vergelijken? Ontdek waar je op moet letten bij energietarieven, vaste kosten, contractduur en voorwaarden. Bereid je vergelijking voor.",
+  alternates: {
+    canonical: "/vergelijken/energie",
+  },
+};
+
 import BackButton from "@/components/BackButton";
 
 const aandachtspunten = [

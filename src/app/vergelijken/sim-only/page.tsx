@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Sim-only vergelijken | Data, prijs en providers",
+  description: "Sim-only vergelijken? Ontdek waar je op moet letten bij mobiele data, netwerkdekking, maandprijzen, belminuten en contractvoorwaarden.",
+  alternates: {
+    canonical: "/vergelijken/sim-only",
+  },
+};
+
 import BackButton from "@/components/BackButton";
 
 const aandachtspunten = [
