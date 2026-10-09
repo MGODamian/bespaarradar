@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://mijnbespaarradar.nl/sitemap.xml",
+    sitemap: "https://www.mijnbespaarradar.nl/sitemap.xml",
   };
 }
