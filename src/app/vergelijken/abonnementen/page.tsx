@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 };
 
 ﻿import BackButton from "@/components/BackButton";
+import AbonnementenCheck from "./AbonnementenCheck";
 
 export default function AbonnementenVergelijkenPage() {
   return (
@@ -29,35 +30,7 @@ export default function AbonnementenVergelijkenPage() {
             tussen zitten waarop je mogelijk kunt besparen.
           </p>
 
-          <div className="mt-8 rounded-2xl border border-emerald-200 bg-emerald-50 p-6">
-            <h2 className="text-lg font-black text-slate-950">
-              Begin met deze controle
-            </h2>
-
-            <div className="mt-5 grid gap-3 md:grid-cols-2">
-              {[
-                "Netflix",
-                "Disney+",
-                "Videoland",
-                "Spotify",
-                "Sportabonnementen",
-                "Overige abonnementen",
-              ].map((name) => (
-                <div
-                  key={name}
-                  className="flex items-center gap-3 rounded-xl border border-emerald-100 bg-white px-4 py-4"
-                >
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-100 text-sm font-black text-emerald-700">
-                    ✓
-                  </span>
-
-                  <span className="font-bold text-slate-800">{name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-7 rounded-2xl bg-slate-50 p-6">
+          <AbonnementenCheck />          <div className="mt-7 rounded-2xl bg-slate-50 p-6">
             <h2 className="font-black text-slate-950">
               Waar kun je op letten?
             </h2>
