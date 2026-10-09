@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import BackButton from "@/components/BackButton";
 import AbonnementenCheck from "./AbonnementenCheck";
+import AbonnementenCalculator from "./AbonnementenCalculator";
 
 export const metadata: Metadata = {
   title: "Abonnementen controleren en besparen | BespaarRadar",
@@ -137,6 +138,7 @@ export default function AbonnementenVergelijkenPage() {
               </div>
 
               <AbonnementenCheck />
+              <AbonnementenCalculator />
             </section>
 
             <section className="mt-10 rounded-[28px] border border-emerald-200 bg-emerald-50 p-6 sm:p-8">
