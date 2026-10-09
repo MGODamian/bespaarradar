@@ -1081,6 +1081,87 @@ function ResultScreen({
           </p>
         </div>
 
+        <div className="mt-10 rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+          <div className="text-xs font-black uppercase tracking-[0.18em] text-emerald-600">
+            JOUW KOSTENOVERZICHT
+          </div>
+
+          <h2 className="mt-2 text-2xl font-black">
+            Dit heb je ingevuld
+          </h2>
+
+          <p className="mt-2 text-sm leading-6 text-slate-500">
+            Dit zijn je opgegeven maandbedragen, geen berekende besparingen.
+            De kosten van geselecteerde streamingdiensten zijn niet meegenomen,
+            omdat we daarvan geen bedragen hebben gevraagd.
+          </p>
+
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { icon: "E", label: "Energie", amount: costs.energy },
+              { icon: "I", label: "Internet", amount: costs.internet },
+              { icon: "M", label: "Mobiel", amount: costs.mobile },
+              { icon: "A", label: "Overige abonnementen", amount: costs.otherSubscriptions },
+            ].map((item) => (
+              <div key={item.label} className="rounded-2xl bg-slate-50 p-5">
+                <div className="text-2xl">{item.icon}</div>
+                <div className="mt-3 text-sm font-bold text-slate-500">
+                  {item.label}
+                </div>
+                <div className="mt-2 text-2xl font-black">
+                  {item.amount.trim() !== "" && Number.isFinite(Number(item.amount)) && Number(item.amount) >= 0
+                    ? new Intl.NumberFormat("nl-NL", {
+                        style: "currency",
+                        currency: "EUR",
+                      }).format(Number(item.amount))
+                    : "Niet ingevuld"}
+                </div>
+                <div className="mt-1 text-xs font-semibold text-slate-400">
+                  per maand
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-5 rounded-[28px] bg-emerald-600 p-6 text-white shadow-lg shadow-emerald-600/10 md:p-8">
+          <div className="text-xs font-black uppercase tracking-[0.18em] text-emerald-100">
+            TOTAAL OPGEGEVEN MAANDLASTEN
+          </div>
+
+          <div className="mt-3 text-4xl font-black tracking-tight md:text-5xl">
+            {new Intl.NumberFormat("nl-NL", {
+              style: "currency",
+              currency: "EUR",
+            }).format(
+              [
+                costs.energy,
+                costs.internet,
+                costs.mobile,
+                costs.otherSubscriptions,
+              ].reduce((total, value) => {
+                const amount = Number(value);
+                return total + (
+                  value.trim() !== "" &&
+                  Number.isFinite(amount) &&
+                  amount >= 0
+                    ? amount
+                    : 0
+                );
+              }, 0)
+            )}
+            <span className="ml-2 text-base font-semibold text-emerald-100">
+              per maand
+            </span>
+          </div>
+
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-emerald-50">
+            Dit is de optelsom van de ingevulde maandbedragen, geen besparing.
+            Niet-ingevulde kosten en streamingdiensten zonder opgegeven
+            maandprijs zijn niet meegerekend.
+          </p>
+        </div>
+
         <div className="mt-12 grid gap-5 lg:grid-cols-[0.8fr_1.2fr]">
           <div className="rounded-[32px] bg-slate-950 p-8 text-white">
             <div className="text-xs font-black uppercase tracking-[0.18em] text-emerald-400">
