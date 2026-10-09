@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 };
 
 import BackButton from "@/components/BackButton";
+import MobielOverzicht from "./MobielOverzicht";
 
 const aandachtspunten = [
   {
@@ -57,6 +58,8 @@ export default function SimOnlyVergelijkenPage() {
           </div>
 
           <div className="px-7 py-10 md:px-12">
+            <MobielOverzicht />
+
             <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-6 md:p-8">
               <div className="text-xs font-black uppercase tracking-widest text-emerald-700">
                 STATUS VERGELIJKER
